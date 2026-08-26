@@ -1,0 +1,22 @@
+/* Self-hosted variable fonts, not loaded from a font CDN at runtime — same
+   convention indienodes_v2 uses (see its docs/decisions.md), carried over
+   here for one reason: consistency of the promise, not shared code, since
+   this is a genuinely separate repo. Files copied from @fontsource-variable
+   packages; this project has no npm dependency on them, just their output. */
+
+@font-face {
+  font-family: "Space Grotesk Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url("../fonts/space-grotesk-latin-wght-normal.woff2")
+    format("woff2-variations");
+}
+
+@font-face {
+  font-family: "Karla Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url("../fonts/karla-latin-wght-normal.woff2") format("woff2-variations");
+}

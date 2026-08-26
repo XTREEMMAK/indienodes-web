@@ -1,0 +1,16 @@
+{
+  "name": "indienodes-web",
+  "version": "0.1.0",
+  "description": "IndieNodes project homepage — indienodes.us. The discovery app itself lives in a separate repo (indienodes_v2) and is intended to run at app.indienodes.us.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "prettier": "^3.3.3"
+  }
+}

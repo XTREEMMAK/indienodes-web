@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{{ title or "IndieNodes" }}</title>
+		<meta name="description" content="{{ description or site.description }}" />
+
+		<meta property="og:title" content="{{ title or 'IndieNodes' }}" />
+		<meta property="og:description" content="{{ description or site.description }}" />
+		<meta property="og:type" content="website" />
+		<meta name="twitter:card" content="summary" />
+
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="stylesheet" href="/assets/css/style.css" />
+	</head>
+	<body>
+		<div class="ambient-bg" aria-hidden="true">
+			<div class="blob blob-warm"></div>
+			<div class="blob blob-warm-2"></div>
+			<div class="blob blob-gold"></div>
+			<div class="blob blob-cool"></div>
+			<canvas id="drifty-stars-canvas"></canvas>
+		</div>
+
+		<header class="site-header">
+			<a class="brand" href="/">
+				<img src="/assets/images/IndieNodes_Logo.webp" alt="" width="28" height="28" />
+				IndieNodes
+			</a>
+			<nav class="site-nav" aria-label="Primary">
+				<a href="{{ site.appUrl }}/">Explore</a>
+				<a href="{{ site.appUrl }}/join">Join</a>
+				<a href="{{ site.appUrl }}/members">Members</a>
+			</nav>
+		</header>
+
+		<main>
+			{{ content | safe }}
+		</main>
+
+		<footer class="site-footer">
+			<span>&copy; {{ site.year }} IndieNodes. GPL-3.0-or-later.</span>
+			<span>
+				<a href="{{ site.githubUrl }}">Source on GitHub</a>
+			</span>
+		</footer>
+
+		<script src="/assets/js/drifty-stars.js" defer></script>
+	</body>
+</html>

@@ -1,0 +1,442 @@
+@import "./fonts.css";
+
+/*
+ * Design tokens carried over from indienodes_v2's src/app.css by value, not
+ * by import — this is a separate repo/build with no shared toolchain. Kept
+ * to exactly the tokens this site actually uses (colors, radii, ambient
+ * palette) rather than the app's full type/spacing scale, since an info
+ * site's rhythm does not need to match an app's pixel-for-pixel.
+ *
+ * System-driven theme only (`prefers-color-scheme`), no manual toggle: the
+ * app has one because a visitor spends real time inside it; five minutes on
+ * a homepage does not earn that control surface.
+ */
+:root {
+  --font-display:
+    "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Karla Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: 0.5rem;
+  --radius-lg: 1.5rem;
+
+  --bg: #f7f4ee;
+  --bg-elevated: #ffffff;
+  --text: #221f1a;
+  --text-muted: #6b6558;
+  --text-faint: #9a9384;
+  --border: #e4ddcf;
+  --accent: #b5502f;
+  --accent-hover: #963f24;
+
+  --ambient-base-start: #f4ede1;
+  --ambient-base-mid: #ede2d0;
+  --ambient-base-end: #e7dcc7;
+  --ambient-blob-warm: rgb(181 80 47 / 0.18);
+  --ambient-blob-warm-2: rgb(217 119 6 / 0.14);
+  --ambient-blob-gold: rgb(202 138 4 / 0.14);
+  --ambient-blob-cool: rgb(45 90 130 / 0.16);
+  --ambient-particle-1: #b5502f;
+  --ambient-particle-2: #ca8a04;
+  --ambient-particle-3: #6b7280;
+  --ambient-particle-4: #2d5a82;
+  --ambient-particle-5: #78716c;
+
+  --type-audio: #3b82f6;
+  --type-comic: #a855f7;
+  --type-text: #f59e0b;
+  --type-game: #22c55e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1420;
+    --bg-elevated: #171d2c;
+    --text: #eef1f6;
+    --text-muted: #9aa7bd;
+    --text-faint: #5c667a;
+    --border: #2a3346cc;
+    --accent: #6ea8f0;
+    --accent-hover: #8bb9f5;
+
+    --ambient-base-start: #121728;
+    --ambient-base-mid: #0d1120;
+    --ambient-base-end: #080a14;
+    --ambient-blob-warm: rgb(224 138 95 / 0.16);
+    --ambient-blob-warm-2: rgb(90 110 210 / 0.3);
+    --ambient-blob-gold: rgb(202 138 4 / 0.12);
+    --ambient-blob-cool: rgb(70 130 210 / 0.5);
+    --ambient-particle-1: #7fa8d9;
+    --ambient-particle-2: #eab308;
+    --ambient-particle-3: #9ca3af;
+    --ambient-particle-4: #6ea8f0;
+    --ambient-particle-5: #c7d2e8;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  margin: 0 0 0.6em;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 4vw + 1rem, 3.4rem);
+}
+h2 {
+  font-size: clamp(1.5rem, 2vw + 1rem, 2rem);
+}
+
+a {
+  color: inherit;
+}
+
+code {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 0.3em;
+  padding: 0.1em 0.4em;
+  font-size: 0.9em;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Buttons — same shape and states as the app's .btn/.btn-primary/.btn-ghost. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Layout shell */
+.site-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 1.4rem 1.65rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+.brand img {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.4rem;
+}
+
+.site-nav a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.site-nav a:hover {
+  color: var(--accent);
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+.site-footer {
+  position: relative;
+  z-index: 1;
+  max-width: 60rem;
+  margin: 3rem auto 0;
+  padding: 1.65rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-faint);
+  font-size: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.site-footer a {
+  color: var(--text-muted);
+  text-decoration: underline;
+}
+
+/* Drifty Stars background — ported alongside drifty-stars.js from
+   AmbientBackground.svelte. See that file's own header comment for what was
+   deliberately dropped (audio reactivity) and why. */
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: linear-gradient(
+    165deg,
+    var(--ambient-base-start) 0%,
+    var(--ambient-base-mid) 48%,
+    var(--ambient-base-end) 100%
+  );
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  backface-visibility: hidden;
+  animation: orbit linear infinite;
+}
+
+.blob-warm {
+  width: 80vmax;
+  height: 80vmax;
+  background: radial-gradient(
+    circle,
+    var(--ambient-blob-warm) 0%,
+    transparent 68%
+  );
+  right: -18%;
+  bottom: -18%;
+  animation-duration: 22s;
+  animation-delay: -5s;
+  transform-origin: -20vw -14vh;
+}
+
+.blob-warm-2 {
+  width: 55vmax;
+  height: 55vmax;
+  background: radial-gradient(
+    circle,
+    var(--ambient-blob-warm-2) 0%,
+    transparent 68%
+  );
+  left: 8%;
+  top: 52%;
+  animation-duration: 16s;
+  animation-delay: -4s;
+  transform-origin: 18vw -12vh;
+}
+
+.blob-gold {
+  width: 50vmax;
+  height: 50vmax;
+  background: radial-gradient(
+    circle,
+    var(--ambient-blob-gold) 0%,
+    transparent 65%
+  );
+  left: 32%;
+  top: -12%;
+  animation-duration: 26s;
+  animation-delay: -10s;
+  transform-origin: -8vw 16vh;
+}
+
+.blob-cool {
+  width: 72vmax;
+  height: 72vmax;
+  background: radial-gradient(
+    circle,
+    var(--ambient-blob-cool) 0%,
+    transparent 65%
+  );
+  left: -18%;
+  top: -18%;
+  animation-duration: 18s;
+  animation-delay: -7s;
+  transform-origin: 22vw 20vh;
+}
+
+@keyframes orbit {
+  100% {
+    transform: translate3d(0, 0, 1px) rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob {
+    animation: none;
+  }
+}
+
+.ambient-bg canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Home page */
+.landing {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.65rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.hero h1 {
+  margin: 0 0 0.8rem;
+}
+
+.lede {
+  max-width: 46ch;
+  margin: 0 0 1.6rem;
+  color: var(--text-muted);
+}
+
+.hero-actions,
+.join-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.types ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 0.9rem;
+}
+
+.types li {
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+}
+
+.types li[data-type="audio"] {
+  border-left-color: var(--type-audio);
+}
+.types li[data-type="comic"] {
+  border-left-color: var(--type-comic);
+}
+.types li[data-type="text"] {
+  border-left-color: var(--type-text);
+}
+.types li[data-type="game"] {
+  border-left-color: var(--type-game);
+}
+
+.type-label {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.type-blurb {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.thesis p,
+.join p {
+  max-width: 62ch;
+  margin: 0 0 0.8rem;
+  color: var(--text-muted);
+}
+
+.principles ul {
+  list-style: disc;
+  margin: 0 0 0.9rem;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  max-width: 62ch;
+  color: var(--text-muted);
+}
+
+.principles li::marker {
+  color: var(--accent);
+}
+
+.join {
+  padding: 1.3rem 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+}
+
+.join p {
+  margin-bottom: 1.1rem;
+}

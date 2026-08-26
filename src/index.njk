@@ -1,0 +1,75 @@
+---
+layout: base.njk
+title: IndieNodes
+---
+<div class="landing">
+	<section class="hero">
+		<h1>Stumble into work worth finding.</h1>
+		<p class="lede">
+			IndieNodes is a webring for indie creators: audio, comics and visual art, writing, and games.
+			Not a platform — no accounts, no algorithm, no feed deciding what you see.
+		</p>
+		<div class="hero-actions">
+			<a class="btn btn-primary" href="{{ site.appUrl }}/">Explore the ring</a>
+			<a class="btn btn-ghost" href="{{ site.appUrl }}/join">Add your work</a>
+		</div>
+	</section>
+
+	<section class="types" aria-labelledby="types-heading">
+		<h2 id="types-heading" class="sr-only">What you'll find</h2>
+		<ul>
+			<li data-type="audio">
+				<span class="type-label">Music</span>
+				<span class="type-blurb">Tracks you can hear, from people who made them.</span>
+			</li>
+			<li data-type="comic">
+				<span class="type-label">Comics</span>
+				<span class="type-blurb">Pages and visual work, read in place.</span>
+			</li>
+			<li data-type="text">
+				<span class="type-label">Writing</span>
+				<span class="type-blurb">Excerpts worth the time they ask for.</span>
+			</li>
+			<li data-type="game">
+				<span class="type-label">Games</span>
+				<span class="type-blurb">Things you can actually play.</span>
+			</li>
+		</ul>
+	</section>
+
+	<section class="thesis" aria-labelledby="thesis-heading">
+		<h2 id="thesis-heading">The data is the API</h2>
+		<p>
+			A single public file, <code>ring.json</code>, is the actual product. The field view, the
+			widget members paste into their own sites, and anything built next are all clients of that
+			file. Any one of them can be retired without taking the ring down.
+		</p>
+		<p>
+			Traffic circulates between members' own sites rather than being collected here. IndieNodes
+			does not need to be a destination for the ring to work.
+		</p>
+	</section>
+
+	<section class="principles" aria-labelledby="principles-heading">
+		<h2 id="principles-heading">What this refuses to do</h2>
+		<ul>
+			<li>No accounts, and no server-side tracking of anything you do.</li>
+			<li>No recommendation algorithm and no behavioral inference, ever.</li>
+			<li>Nothing plays sound without you asking.</li>
+			<li>Likes never leave your browser.</li>
+			<li>No AI artists. Every entry is the work of a person.</li>
+		</ul>
+	</section>
+
+	<section class="join" aria-labelledby="join-heading">
+		<h2 id="join-heading">Are you a creator?</h2>
+		<p>
+			Joining takes about five minutes and needs a page you control. If you don't have one, the
+			form will build you a small site to upload, ring badge already in the footer.
+		</p>
+		<div class="join-actions">
+			<a class="btn btn-primary" href="{{ site.appUrl }}/join">Join the ring</a>
+			<a class="btn btn-ghost" href="{{ site.appUrl }}/members">See who's in it</a>
+		</div>
+	</section>
+</div>
