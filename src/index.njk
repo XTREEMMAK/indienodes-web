@@ -1,75 +1,283 @@
 ---
 layout: base.njk
-title: IndieNodes
+title: IndieNodes — Find work worth finding
+description: Discover independent music, comics, writing, and games across the open web. No accounts, algorithms, or tracking.
 ---
+
 <div class="landing">
-	<section class="hero">
-		<h1>Stumble into work worth finding.</h1>
-		<p class="lede">
-			IndieNodes is a webring for indie creators: audio, comics and visual art, writing, and games.
-			Not a platform — no accounts, no algorithm, no feed deciding what you see.
-		</p>
-		<div class="hero-actions">
-			<a class="btn btn-primary" href="{{ site.appUrl }}/">Explore the ring</a>
-			<a class="btn btn-ghost" href="{{ site.appUrl }}/join">Add your work</a>
-		</div>
-	</section>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="eyebrow"><span></span> The independent web, connected</p>
+      <h1 id="hero-title">Find work the<br /><em>algorithm missed.</em></h1>
+      <p class="lede">
+        IndieNodes is a webring for handmade music, comics, writing, and games.
+        Wander between creators’ own sites—no feed deciding what deserves your
+        attention.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ site.appUrl }}/"
+          >Explore the ring
+          <svg aria-hidden="true" viewBox="0 0 20 20">
+            <path d="M4 10h11m-4-4 4 4-4 4" /></svg
+        ></a>
+        <a class="btn btn-ghost" href="{{ site.appUrl }}/join">Add your work</a>
+      </div>
+      <ul class="hero-notes" aria-label="IndieNodes principles">
+        <li>No accounts</li>
+        <li>No tracking</li>
+        <li>Human-made</li>
+      </ul>
+    </div>
 
-	<section class="types" aria-labelledby="types-heading">
-		<h2 id="types-heading" class="sr-only">What you'll find</h2>
-		<ul>
-			<li data-type="audio">
-				<span class="type-label">Music</span>
-				<span class="type-blurb">Tracks you can hear, from people who made them.</span>
-			</li>
-			<li data-type="comic">
-				<span class="type-label">Comics</span>
-				<span class="type-blurb">Pages and visual work, read in place.</span>
-			</li>
-			<li data-type="text">
-				<span class="type-label">Writing</span>
-				<span class="type-blurb">Excerpts worth the time they ask for.</span>
-			</li>
-			<li data-type="game">
-				<span class="type-label">Games</span>
-				<span class="type-blurb">Things you can actually play.</span>
-			</li>
-		</ul>
-	</section>
+    <div
+      class="ring-demo"
+      aria-label="A preview of the IndieNodes discovery experience"
+    >
+      <div class="demo-glow"></div>
+      <div class="demo-window">
+        <div class="window-bar">
+          <div class="window-dots" aria-hidden="true">
+            <i></i><i></i><i></i>
+          </div>
+          <div class="window-address">indienodes.us / wander</div>
+          <span class="window-status">Live</span>
+        </div>
+        <div class="demo-stage">
+          <div class="demo-meta">
+            <span>Somewhere in the ring</span><span>01 / 04</span>
+          </div>
+          <div class="demo-art" aria-hidden="true">
+            <div class="art-orbit orbit-one"></div>
+            <div class="art-orbit orbit-two"></div>
+            <div class="art-core"></div>
+          </div>
+          <div class="demo-description">
+            <div>
+              <span class="content-chip chip-audio">Audio</span>
+              <h2>A new sound, on its own terms.</h2>
+              <p>
+                Listen here, then follow the trail back to the artist’s own
+                corner of the web.
+              </p>
+            </div>
+            <span class="round-button" aria-hidden="true"
+              ><svg viewBox="0 0 20 20"><path d="M7 4.5 14 10l-7 5.5z" /></svg
+            ></span>
+          </div>
+        </div>
+      </div>
+      <div class="floating-card floating-card-comic" aria-hidden="true">
+        <span class="content-chip chip-comic">Comics</span>
+        <div class="comic-lines"><i></i><i></i><i></i></div>
+      </div>
+      <div class="floating-card floating-card-game" aria-hidden="true">
+        <span class="content-chip chip-game">Games</span>
+        <div class="pixel-flower"><i></i><i></i><i></i><i></i><b></b></div>
+      </div>
+    </div>
+  </section>
 
-	<section class="thesis" aria-labelledby="thesis-heading">
-		<h2 id="thesis-heading">The data is the API</h2>
-		<p>
-			A single public file, <code>ring.json</code>, is the actual product. The field view, the
-			widget members paste into their own sites, and anything built next are all clients of that
-			file. Any one of them can be retired without taking the ring down.
-		</p>
-		<p>
-			Traffic circulates between members' own sites rather than being collected here. IndieNodes
-			does not need to be a destination for the ring to work.
-		</p>
-	</section>
+  <section class="content-strip" aria-label="What you can discover">
+    <p>Made to be stumbled upon</p>
+    <ul>
+      <li><span class="strip-dot type-audio"></span>Music</li>
+      <li><span class="strip-dot type-comic"></span>Comics &amp; art</li>
+      <li><span class="strip-dot type-text"></span>Writing</li>
+      <li><span class="strip-dot type-game"></span>Games</li>
+    </ul>
+  </section>
 
-	<section class="principles" aria-labelledby="principles-heading">
-		<h2 id="principles-heading">What this refuses to do</h2>
-		<ul>
-			<li>No accounts, and no server-side tracking of anything you do.</li>
-			<li>No recommendation algorithm and no behavioral inference, ever.</li>
-			<li>Nothing plays sound without you asking.</li>
-			<li>Likes never leave your browser.</li>
-			<li>No AI artists. Every entry is the work of a person.</li>
-		</ul>
-	</section>
+  <section
+    class="features section-shell"
+    id="why"
+    aria-labelledby="features-title"
+  >
+    <div class="section-heading">
+      <p class="eyebrow"><span></span> Built for discovery</p>
+      <h2 id="features-title">A better way to wander.</h2>
+      <p>
+        IndieNodes helps good work travel without turning creators or visitors
+        into a product.
+      </p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-card feature-card-wide">
+        <div class="feature-copy">
+          <div class="icon-box" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <circle cx="7" cy="12" r="3" />
+              <circle cx="17" cy="7" r="3" />
+              <circle cx="17" cy="17" r="3" />
+              <path d="m9.7 10.7 4.6-2.4M9.7 13.3l4.6 2.4" />
+            </svg>
+          </div>
+          <h3>One click. A whole independent web.</h3>
+          <p>
+            Move from one member’s site to the next. Every stop is different
+            because every creator owns their space.
+          </p>
+        </div>
+        <div class="node-map" aria-hidden="true">
+          <svg viewBox="0 0 540 260" preserveAspectRatio="none">
+            <path d="M52 92C133 6 202 39 270 128s158 109 220 22" />
+            <path d="M48 182c86 39 140-9 199-51S380 33 488 70" />
+          </svg>
+          <div class="map-node node-a"><span>♫</span></div>
+          <div class="map-node node-b"><span>✦</span></div>
+          <div class="map-node node-c">
+            <img src="/assets/images/IndieNodes_Logo.webp" alt="" />
+          </div>
+          <div class="map-node node-d"><span>Aa</span></div>
+          <div class="map-node node-e"><span>◆</span></div>
+        </div>
+      </article>
+      <article class="feature-card">
+        <div class="icon-box icon-warm" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 20s-7-3.8-7-9.4A3.6 3.6 0 0 1 11.5 8L12 9l.5-1A3.6 3.6 0 0 1 19 10.6C19 16.2 12 20 12 20Z"
+            />
+          </svg>
+        </div>
+        <h3>Private by default</h3>
+        <p>
+          No sign-in, profiles, or behavioral tracking. Likes stay in your
+          browser, where they belong.
+        </p>
+        <div class="privacy-status" aria-hidden="true">
+          <span></span> Nothing sent
+        </div>
+      </article>
+      <article class="feature-card">
+        <div class="icon-box icon-gold" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 3 14 8l5 .5-3.8 3.4 1.1 5.1-4.3-2.6L7.7 17l1.1-5.1L5 8.5 10 8l2-5Z"
+            />
+          </svg>
+        </div>
+        <h3>Human work only</h3>
+        <p>
+          A home for work made by people—with all the rough edges, strange
+          ideas, and fingerprints intact.
+        </p>
+        <div class="human-stamp" aria-hidden="true">
+          Made by<br /><strong>someone</strong>
+        </div>
+      </article>
+      <article class="feature-card feature-card-media">
+        <div class="feature-copy">
+          <div class="icon-box icon-cool" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M5 5h14v14H5z" />
+              <path d="m9 15 2.5-3 2 2 1.5-2 2 3M9 9h.01" />
+            </svg>
+          </div>
+          <h3>Made for the medium</h3>
+          <p>
+            Hear a track, read a page, or play a game in place. Every kind of
+            work gets room to be itself.
+          </p>
+        </div>
+        <div class="media-stack" aria-hidden="true">
+          <div class="media-panel panel-back">
+            <span>Words</span><i></i><i></i><i></i>
+          </div>
+          <div class="media-panel panel-mid">
+            <span>Panels</span><b></b><b></b><b></b>
+          </div>
+          <div class="media-panel panel-front">
+            <div class="waveform">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <span>00:42</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
 
-	<section class="join" aria-labelledby="join-heading">
-		<h2 id="join-heading">Are you a creator?</h2>
-		<p>
-			Joining takes about five minutes and needs a page you control. If you don't have one, the
-			form will build you a small site to upload, ring badge already in the footer.
-		</p>
-		<div class="join-actions">
-			<a class="btn btn-primary" href="{{ site.appUrl }}/join">Join the ring</a>
-			<a class="btn btn-ghost" href="{{ site.appUrl }}/members">See who's in it</a>
-		</div>
-	</section>
+  <section
+    class="how-it-works section-shell"
+    id="how-it-works"
+    aria-labelledby="how-title"
+  >
+    <div class="section-heading centered-heading">
+      <p class="eyebrow"><span></span> How it works</p>
+      <h2 id="how-title">Small pieces, loosely joined.</h2>
+      <p>
+        No captive platform. Just a simple path between people making things on
+        the web.
+      </p>
+    </div>
+    <ol class="steps">
+      <li>
+        <span class="step-number">01</span>
+        <div class="step-visual browse-visual" aria-hidden="true">
+          <i></i><i></i><i></i><b></b>
+        </div>
+        <h3>Start anywhere</h3>
+        <p>Open the field view or use a ring badge on any member’s site.</p>
+      </li>
+      <li>
+        <span class="step-number">02</span>
+        <div class="step-visual discover-visual" aria-hidden="true">
+          <i></i><i></i><i></i><b>✦</b>
+        </div>
+        <h3>Follow your curiosity</h3>
+        <p>
+          See, hear, read, or play something before choosing where to go next.
+        </p>
+      </li>
+      <li>
+        <span class="step-number">03</span>
+        <div class="step-visual leave-visual" aria-hidden="true">
+          <i></i><b>↗</b>
+        </div>
+        <h3>Land on their site</h3>
+        <p>
+          Traffic goes to creators’ own homes—not into another platform’s feed.
+        </p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="thesis section-shell" aria-labelledby="thesis-title">
+    <div class="thesis-mark" aria-hidden="true">
+      <img src="/assets/images/IndieNodes_Logo.webp" alt="" /><span></span
+      ><span></span>
+    </div>
+    <div class="thesis-copy">
+      <p class="eyebrow"><span></span> Built to outlive the interface</p>
+      <h2 id="thesis-title">A ring, not another platform.</h2>
+      <p>
+        The public <code>ring.json</code> file is the product. The field view,
+        site widget, and whatever comes next are simply ways into it—any one can
+        disappear without taking the community with it.
+      </p>
+      <a class="text-link" href="{{ site.githubUrl }}"
+        >See how IndieNodes is built <span>↗</span></a
+      >
+    </div>
+  </section>
+
+  <section class="final-cta section-shell" aria-labelledby="cta-title">
+    <div class="cta-stars" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i>
+    </div>
+    <p class="eyebrow light-eyebrow">
+      <span></span> Your next favorite thing is out there
+    </p>
+    <h2 id="cta-title">Go find something<br />worth finding.</h2>
+    <p>
+      Take the first step into the ring—or add your own corner of the web to it.
+    </p>
+    <div class="hero-actions cta-actions">
+      <a class="btn btn-light" href="{{ site.appUrl }}/"
+        >Start exploring <span>→</span></a
+      ><a class="btn btn-outline-light" href="{{ site.appUrl }}/join"
+        >Join the ring</a
+      >
+    </div>
+  </section>
 </div>
