@@ -1,50 +1,112 @@
-# IndieNodes — project homepage
+<p align="center">
+  <img src="src/assets/images/IndieNodes_Logo.webp" alt="IndieNodes logo" width="220" />
+</p>
 
-The `indienodes.us` front door. Static [Eleventy](https://www.11ty.dev/) site — no
-framework runtime shipped, output is plain HTML/CSS with one small vanilla-JS file.
+<h1 align="center">IndieNodes Web</h1>
 
-The discovery app itself (the field view, `/join`, `/members`, everything
-interactive) lives in a separate repository (`indienodes_v2`) and is intended to run
-at `app.indienodes.us`. This repo does not build or embed that app; every link to it
-is a plain `<a href>` to `site.appUrl` (`src/_data/site.js`) — update that one value
-once `app.indienodes.us` is live.
+<p align="center">
+  The project homepage for IndieNodes, a creator-first webring for independent creative work.
+</p>
 
-## Why a separate repo, and why Eleventy rather than the app's own SvelteKit
+<p align="center">
+  <a href="https://indienodes.us">Visit IndieNodes</a> ·
+  <a href="#run-it-locally">Run locally</a> ·
+  <a href="#build-and-deploy">Build and deploy</a>
+</p>
 
-Recorded in `indienodes_v2`'s `docs/decisions.md` ("The root route stays the app...").
-Short version: this is an info page with a handful of nav targets (home today; a
-privacy notice and Terms of Use are known future pages), not an application — it
-doesn't need client-side routing, hydration, or a component framework. Eleventy
-gives shared layout/nav/footer via includes without any of that, and the output is
-exactly as static as hand-written HTML.
+## Overview
 
-## What's ported from the app, and how
+This repository builds the `indienodes.us` homepage with Eleventy. It introduces the
+project and links visitors to the discovery app, which lives separately in
+`indienodes-app` and is intended to run at `app.indienodes.us`.
 
-Design tokens (`src/assets/css/style.css`), the two self-hosted variable fonts
-(`src/assets/fonts/`, taken from the `@fontsource-variable` packages the app already
-uses, not re-fetched from a CDN — this repo has no npm dependency on those packages,
-just their font files), the logo, and the favicon are all copied by value, not
-shared by import: this is a genuinely separate build with no shared toolchain.
+The production output is plain HTML, CSS, fonts, images, and a small vanilla
+JavaScript background animation. Shared layouts use Nunjucks templates; the site
+needs no application server or client-side framework runtime.
 
-The Drifty Stars background (`src/assets/js/drifty-stars.js`) is a vanilla-JS port
-of `AmbientBackground.svelte`, with the audio-reactive drift boost and big-hit
-particle burst deliberately dropped — both exist there because that app has an
-audio player; this page never does.
+## What it includes
 
-Copy (the hero, the four content types, the "data is the API" thesis, the five
-principles) is lifted from the app's own `AboutModal.svelte` and `README.md` rather
-than freshly written, so the two sites say the same thing in the same voice.
+- **A project introduction:** the creative media, principles, and “data is the API”
+  approach behind IndieNodes.
+- **Shared visual identity:** the app's logo, favicon, design tokens, and self-hosted
+  Space Grotesk and Karla fonts, copied into this independent build.
+- **An ambient background:** a vanilla JavaScript port of the app's Drifty Stars
+  effect, without its audio-reactive behavior.
+- **A portable container:** a static build served by Caddy, following the
+  `indienodes-app` deployment pattern.
 
-## Running locally
+## Run it locally
+
+Use Node.js 22 or newer and npm.
 
 ```bash
-npm install
-npm run dev     # eleventy --serve
-npm run build   # outputs to _site/
+npm ci
+npm run dev
 ```
 
-## Deploying
+### Common commands
 
-Static output, so any static file host works — the same Caddy-serves-a-directory
-shape `indienodes_v2` already uses (`try_files {path} {path}.html`) is a drop-in
-fit; `_site/index.html` is the only route that exists today.
+| Command          | Purpose                                        |
+| ---------------- | ---------------------------------------------- |
+| `npm run dev`    | Start Eleventy's local development server      |
+| `npm run build`  | Build the static production site into `_site/` |
+| `npm run format` | Format the project with Prettier               |
+
+## Build and deploy
+
+The included [Dockerfile](./Dockerfile) installs locked dependencies, builds the
+site with Node.js 22, and copies only the static output into a Caddy 2 runtime.
+[Caddyfile](./Caddyfile) serves HTTP on port **8080**, with compression and a
+health check against `/`. The runtime runs as a non-root numeric user, defaulting
+to UID/GID `1000:1000`; Infra can override these with the `PUID` and `PGID` build
+arguments.
+
+```bash
+docker build -t indienodes-web .
+docker run -d --name indienodes-web -p 8080:8080 indienodes-web
+```
+
+For local Compose use:
+
+```bash
+docker compose up --build -d
+```
+
+[docker-compose.yml](./docker-compose.yml) sets the container name to
+`indienodes-web`. Set `PORT` to change the published host port; the container
+always listens on 8080. No host paths, external Docker networks, or CPU
+architecture are prescribed. Infra supplies routing, TLS termination, restart
+policy, and registry/image selection in its deployment configuration.
+
+The build stage uses `$BUILDPLATFORM` because the generated site is architecture
+independent. The runtime follows the requested target platform. Infra can publish
+an image for multiple Linux architectures using Buildx, for example (replace the
+registry and tag with the deployment's values):
+
+```bash
+docker buildx build --platform linux/amd64,linux/arm64 \
+  -t YOUR_REGISTRY/indienodes-web:YOUR_TAG --push .
+```
+
+### Site configuration
+
+Links and shared metadata live in [`src/_data/site.js`](./src/_data/site.js).
+**Before launching the homepage at `indienodes.us`, update `appUrl` to
+`https://app.indienodes.us` once the app is deployed there.** It currently points
+to `https://indienodes.us`. Review `githubUrl` there as well when finalizing the
+repository's public location.
+
+These values are compiled into the static pages. Change the source and rebuild
+the image to update them; container environment variables do not rewrite the
+site at runtime.
+
+## Project structure
+
+| Path                     | Purpose                                         |
+| ------------------------ | ----------------------------------------------- |
+| `src/index.njk`          | Homepage content                                |
+| `src/_includes/base.njk` | Shared page layout                              |
+| `src/_data/site.js`      | App links and shared metadata                   |
+| `src/assets/`            | Styles, fonts, logo, and background script      |
+| `.eleventy.js`           | Build configuration and asset copying           |
+| `_site/`                 | Generated output, excluded from version control |

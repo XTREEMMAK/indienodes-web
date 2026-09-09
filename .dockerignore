@@ -1,0 +1,14 @@
+.git
+.github
+.agents
+.codex
+node_modules
+_site
+.cache
+.env
+.env.*
+*.log
+.DS_Store
+Thumbs.db
+README.md
+docker-compose*.yml

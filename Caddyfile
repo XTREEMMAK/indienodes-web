@@ -1,0 +1,13 @@
+# Infra terminates TLS and forwards HTTP to this unprivileged port.
+:8080 {
+	root * /srv
+	encode zstd gzip
+	header {
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		X-Frame-Options "DENY"
+	}
+	try_files {path} {path}.html {path}/
+	file_server
+}
